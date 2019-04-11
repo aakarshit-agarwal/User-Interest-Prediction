@@ -1,0 +1,103 @@
+{% extends 'Twitter/HeaderSiderFooter.html' %}
+{% load static %}
+
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">DataSet Files</span>
+                        <span class="info-box-number">{{ DataSetCount }}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <div class="col-md-12">
+                <!-- TABLE: LATEST ORDERS -->
+                {% for file in JSONData %}
+                    {% for tweets in file %}
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                {% for tweet in tweets|slice:":1" %}
+                                    {% for k,v in tweet.items %}
+                                        {% if k == 'label' %}
+                                            <h3 class="box-title">{{ v }}.json</h3>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                            class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="table-responsive">
+                                    <table class="table no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th>Tweet ID</th>
+                                            <th>Text</th>
+                                            <th>Label</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for tweet in tweets|slice:":5" %}
+                                            <tr>
+                                                {% for k, v in tweet.items %}
+                                                    <td>{{ v }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+        <!-- /.col -->
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+{% endblock %}
+
+{% block script %}
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="{% static 'js/dashboard2.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'js/fastclick.min.js' %}"></script>
+    <!-- jvectormap -->
+    <script src="{% static 'js/jquery-jvectormap-1.2.2.min.js' %}"></script>
+    <script src="{% static 'js/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <!-- Sparkline -->
+    <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
+    <!-- ChartJS 1.0.1 -->
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{% static 'js/demo.js' %}"></script>
+
+{% endblock %}

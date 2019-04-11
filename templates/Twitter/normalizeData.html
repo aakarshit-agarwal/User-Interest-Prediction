@@ -1,0 +1,95 @@
+{% extends 'Twitter/HeaderSiderFooter.html' %}
+{% load static %}
+
+{% block stylesheets %}
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+{% endblock %}
+
+{% block content %}
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Upload DataSet -->
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Normalize Data Set</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form method="post" action="{% url 'normalizeDataSet' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" name="links" class="minimal" checked>
+                                        Remove Links
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" name="retweet" class="minimal" checked>
+                                        Remove ReTweet Tags
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" name="hashtag" class="minimal" checked>
+                                        Nomalize Hash Tags
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" name="symbols" class="minimal" checked>
+                                        Remove Symbols
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" name="lowercase" class="minimal" checked>
+                                        Convert to lower case
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="submit" value="Normalize" style="width:100px;"
+                                           class="btn btn-block btn-primary"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </form>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">*Original Dataset will remain intact.</div>
+            <!-- /.box -->
+        </section>
+        <!-- /.content -->
+{% endblock content %}
+
+{% block script %}
+    <!-- iCheck 1.0.1 -->
+    <script src="{% static 'js/icheck.min.js' %}"></script>
+    <script>
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            radioClass: 'iradio_minimal-blue'
+        });
+    </script>
+    <script>
+        $(function () {
+            $('.active').removeClass('active');
+            $('#training').addClass('active');
+        });
+    </script>
+{% endblock script %}

@@ -1,0 +1,99 @@
+{% extends 'Twitter/HeaderSiderFooter.html' %}
+{% load static %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Upload DataSet -->
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Upload Data Set</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form method="post" action="{% url 'uploadDataSet' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputFile">Files input</label>
+                                <input type="file" name="dataSetFiles" id="dataSetFiles" multiple accept=".json">
+
+                                <p class="help-block">Select DataSet Files.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="submit" value="Upload" style="width:100px;"
+                                       class="btn btn-block btn-primary"/>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">*All file must be in .json file format.</div>
+        </div>
+        <!-- /.box -->
+        <!-- Fetch DataSet -->
+        {#            <div class="box box-default">#}
+        {#                <div class="box-header with-border">#}
+        {#                    <h3 class="box-title">Fetch Online</h3>#}
+        {##}
+        {#                    <div class="box-tools pull-right">#}
+        {#                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i#}
+        {#                                class="fa fa-minus"></i></button>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#                <!-- /.box-header -->#}
+        {#                <div class="box-body">#}
+        {#                    <div class="row">#}
+        {#                        <div class="col-md-6">#}
+        {#                            <div class="form-group">#}
+        {#                                <label>Target</label>#}
+        {#                                <input type="text" class="form-control" placeholder="Enter ...">#}
+        {#                            </div>#}
+        {#                            <!-- /.form-group -->#}
+        {#                            <div class="form-group">#}
+        {#                                <label>Label</label>#}
+        {#                                <input type="text" class="form-control" placeholder="Enter ...">#}
+        {#                            </div>#}
+        {#                            <!-- /.form-group -->#}
+        {#                        </div>#}
+        {#                        <!-- /.col -->#}
+        {#                        <div class="col-md-6">#}
+        {#                        </div>#}
+        {#                        <!-- /.col -->#}
+        {#                    </div>#}
+        {#                    <!-- /.row -->#}
+        {#                </div>#}
+        {#                <!-- /.box-body -->#}
+        {#                <div class="box-footer">*Formatted tweets will be stored in .json file format.</div>#}
+        {#            </div>#}
+        <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(function () {
+            $('.active').removeClass('active');
+            $('#training').addClass('active');
+        });    </script>
+{% endblock %}
